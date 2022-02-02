@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2024 Paranoid Android
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+
+
+    <!-- Hotseat searchbar -->
+    <string name="hotseat_label_search">Search</string>
+    <string name="hotseat_label_lens">Google Lens</string>
+    <string name="hotseat_label_voice_search">Voice search</string>
+
+</resources>
