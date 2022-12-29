@@ -184,7 +184,42 @@ public class TaskbarView extends FrameLayout implements FolderIcon.FolderIconPar
             mTaskbarOverflowView.setPadding(mItemPadding, mItemPadding, mItemPadding, mItemPadding);
         }
         // TODO: Disable touch events on QSB otherwise it can crash.
-        mQsb = LayoutInflater.from(context).inflate(R.layout.search_container_hotseat, this, false);
+        if (Utilities.isGSAEnabled(context) && Utilities.isQSBEnabled(context)) {
+            mQsb = LayoutInflater.from(context).inflate(R.layout.search_container_hotseat, this, false);
+        } else {
+            mQsb = LayoutInflater.from(context).inflate(R.layout.empty_view, this, false);
+        }
+
+        // Default long press (touch) delay = 400ms
+        mAllAppsButtonTouchDelayMs = ViewConfiguration.getLongPressTimeout();
+    }
+
+    @DrawableRes
+    private int getAllAppsButton(boolean isTransientTaskbar) {
+        boolean shouldSelectTransientIcon =
+                (isTransientTaskbar || enableTaskbarPinning())
+                && !mActivityContext.isThreeButtonNav();
+        if (ENABLE_ALL_APPS_SEARCH_IN_TASKBAR.get()) {
+            return shouldSelectTransientIcon
+                    ? R.drawable.ic_transient_taskbar_all_apps_search_button
+                    : R.drawable.ic_taskbar_all_apps_search_button;
+        } else {
+            return shouldSelectTransientIcon
+                    ? R.drawable.ic_transient_taskbar_all_apps_button
+                    : R.drawable.ic_taskbar_all_apps_button;
+        }
+    }
+
+    @DimenRes
+    public int getAllAppsButtonTranslationXOffset(boolean isTransientTaskbar) {
+        if (isTransientTaskbar) {
+            return R.dimen.transient_taskbar_all_apps_button_translation_x_offset;
+        } else {
+            return ENABLE_ALL_APPS_SEARCH_IN_TASKBAR.get()
+                    ? R.dimen.taskbar_all_apps_search_button_translation_x_offset
+                    : R.dimen.taskbar_all_apps_button_translation_x_offset;
+        }
+>>>>>>> f470836217 (Launcher3: Fix taskbar crash without QSB)
     }
 
     @Override
