@@ -6,6 +6,10 @@
 <resources>
 
 
+    <!-- Hide top shadow -->
+    <string name="hide_top_shadow_title">Hide top shadow</string>
+    <string name="hide_top_shadow_summary">Remove shadow underneath the status bar</string>
+
     <!-- Hotseat searchbar -->
     <string name="hotseat_label_search">Search</string>
     <string name="hotseat_label_lens">Google Lens</string>
